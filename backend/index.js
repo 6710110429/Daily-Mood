@@ -1,3 +1,5 @@
+const fs = require("fs");
+
 const { PubSub } = require("@google-cloud/pubsub");
 
 const pubsub = new PubSub();
@@ -44,6 +46,19 @@ app.post("/publish", async (req, res) => {
   }
 });
 
+app.post("/backup", (req, res) => {
+  const data = {
+    message: "Backup data",
+    time: new Date().toISOString()
+  };
+
+  fs.writeFileSync(
+    `backups/backup-${Date.now()}.json`,
+    JSON.stringify(data, null, 2)
+  );
+
+  res.send("Backup completed");
+});
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
