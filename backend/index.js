@@ -73,6 +73,14 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get("/user/:id", (req, res) => {
+  res.json({
+    userId: req.params.id,
+    mood: "happy",
+    time: new Date().toISOString()
+  });
+});
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
