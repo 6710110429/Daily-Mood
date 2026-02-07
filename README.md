@@ -1,27 +1,62 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Daily Mood Flower Journal 🌸
 
-# Run and deploy your AI Studio app
+ระบบบันทึกอารมณ์ประจำวัน พัฒนาโดยใช้ React และ Node.js  
+ออกแบบให้รองรับผู้ใช้หลายคน และการ Deploy บน Cloud
 
-This contains everything you need to run your app locally.
+---
 
-View your app in AI Studio: https://ai.studio/apps/drive/1o0Mcc2Q44J1mEgZmVMrsgGANRS7E_MZ_
+## ✅ System Stack
+- Frontend: React
+- Backend: Node.js + Express
+- Container: Docker
+- Infra: Terraform
+- Orchestration: Kubernetes
 
-## Run Locally
+---
 
-**Prerequisites:**  Node.js
+## ✅ Category Coverage
 
+**1️⃣ Concurrency**  
+Backend API รองรับผู้ใช้หลายคนพร้อมกัน
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
-   
-## Load Balancer
+**2️⃣ Docker**  
+Backend บรรจุอยู่ใน Docker Container
 
-This project uses a Load Balancer to distribute incoming API requests
-to multiple backend instances running in containers.
+**3️⃣ Git**  
+ควบคุมเวอร์ชันด้วย Git และ GitHub
 
-The Load Balancer helps handle concurrent users and improves system reliability.
+**4️⃣ Terraform**  
+ใช้ Terraform สร้าง Infrastructure อัตโนมัติ
+
+**5️⃣ Pub/Sub**  
+ใช้ระบบ Pub/Sub สำหรับส่งข้อมูลระหว่างบริการ
+
+**6️⃣ Load Balancer**  
+ใช้ Kubernetes Service แบบ LoadBalancer
+
+**7️⃣ Kubernetes (K8s)**  
+จัดการ Container และรองรับการ Scaling
+
+**8️⃣ Backup**  
+สำรองข้อมูลเป็นไฟล์ JSON
+
+**9️⃣ Security**  
+ป้องกัน API ด้วย API Key และ CORS
+
+**🔟 Multiusers**  
+รองรับผู้ใช้หลายคนผ่าน API
+
+---
+
+## 🚀 Run Project
+
+```bash
+# Backend
+cd backend
+npm install
+node index.js
+
+# Frontend
+npm install
+npm run dev
+
