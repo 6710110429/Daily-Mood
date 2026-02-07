@@ -1,0 +1,5 @@
+{
+  "name": "Daily Mood Flower Journal",
+  "description": "A beautiful, static web application to track your daily emotions through a digital flower garden. No backend required.",
+  "requestFramePermissions": []
+}
