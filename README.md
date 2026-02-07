@@ -18,3 +18,10 @@ View your app in AI Studio: https://ai.studio/apps/drive/1o0Mcc2Q44J1mEgZmVMrsgG
 2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
 3. Run the app:
    `npm run dev`
+   
+## Load Balancer
+
+This project uses a Load Balancer to distribute incoming API requests
+to multiple backend instances running in containers.
+
+The Load Balancer helps handle concurrent users and improves system reliability.
