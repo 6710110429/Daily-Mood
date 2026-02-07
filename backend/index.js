@@ -1,3 +1,6 @@
+const cors = require("cors");
+app.use(cors());
+
 const fs = require("fs");
 
 const { PubSub } = require("@google-cloud/pubsub");
@@ -59,6 +62,17 @@ app.post("/backup", (req, res) => {
 
   res.send("Backup completed");
 });
+
+const API_KEY = process.env.API_KEY || "123456";
+
+app.use((req, res, next) => {
+  const key = req.headers["x-api-key"];
+  if (key !== API_KEY) {
+    return res.status(403).send("Forbidden");
+  }
+  next();
+});
+
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
