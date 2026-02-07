@@ -1,3 +1,8 @@
+const { PubSub } = require("@google-cloud/pubsub");
+
+const pubsub = new PubSub();
+const topicName = "test-topic";
+
 const express = require("express");
 const cors = require("cors");
 
@@ -21,6 +26,24 @@ app.post("/mood", (req, res) => {
 app.get("/health", (req, res) => {
   res.send("Backend API is running");
 });
+// API สำหรับทดสอบการส่งข้อความไปยัง Pub/Sub
+app.post("/publish", async (req, res) => {
+  const message = {
+    text: "Hello from Backend",
+    time: new Date().toISOString()
+  };
+
+  try {
+    const dataBuffer = Buffer.from(JSON.stringify(message));
+    await pubsub.topic(topicName).publishMessage({ data: dataBuffer });
+
+    res.send("Message published to Pub/Sub");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Publish failed");
+  }
+});
+
 
 const PORT = 3000;
 app.listen(PORT, () => {
