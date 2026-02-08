@@ -10,11 +10,11 @@ terraform {
 }
 
 provider "google" {
-  project = "your-gcp-project-id"
+  project = "daily-mood-cloud"
   region  = "asia-southeast1"
 }
 resource "google_storage_bucket" "backup_bucket" {
-  name     = "daily-mood-backup-bucket"
+  name     = "daily-mood-backup-6710110429"
   location = "ASIA"
 
   uniform_bucket_level_access = true
