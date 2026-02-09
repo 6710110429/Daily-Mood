@@ -32,7 +32,7 @@
 ## Repository
 - Frontend / Backend แยกส่วนชัดเจน
 
-##
+## How To
 - git clone https://github.com/6710110429/Daily-Mood.git
 - code .
 - cd Daily-Mood
