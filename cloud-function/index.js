@@ -3,30 +3,27 @@ const admin = require("firebase-admin");
 admin.initializeApp();
 const db = admin.firestore();
 
-exports.logMood = async (req, res) => {
-  const body = req.body || {};
-  const { userId, mood } = body;
+// 🎯 Cloud Function: รับ event จาก Pub/Sub
+exports.handleMoodEvent = async (event, context) => {
+  const message = event.data
+    ? JSON.parse(Buffer.from(event.data, "base64").toString())
+    : {};
 
-  // ✅ กรณี Cloud Scheduler (ไม่มี body)
-  if (!userId || !mood) {
-    await db.collection("system_logs").add({
-      type: "scheduler",
-      message: "Daily cron executed",
-      createdAt: new Date(),
-    });
+  console.log("📥 Mood event received:", message);
 
-    return res.json({
-      status: "scheduler-ok",
-    });
+  if (!message.userId || !message.mood) {
+    console.log("❌ Missing data");
+    return;
   }
 
-  // ✅ กรณี user ใช้งานจริง
+  // ตัวอย่าง: log ลง collection logs
   await db.collection("logs").add({
-    userId,
-    mood,
+    userId: message.userId,
+    mood: message.mood,
     createdAt: new Date(),
+    source: "pubsub",
   });
 
-  res.json({ status: "logged" });
+  console.log("✅ Mood logged to Firestore");
 };
 
