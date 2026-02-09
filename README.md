@@ -31,3 +31,10 @@
 
 ## Repository
 - Frontend / Backend แยกส่วนชัดเจน
+
+##
+git clone https://github.com/6710110429/Daily-Mood.git
+code .
+cd Daily-Mood
+npm install
+npm run dev
