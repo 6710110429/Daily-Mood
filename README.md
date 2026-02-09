@@ -61,3 +61,11 @@ npm install
 npm run dev
 
 "# Project-Dailly-Mood" 
+## Deployment Architecture
+- Frontend: Cloud Run
+- Backend API: Cloud Run (Express.js)
+- Background Job: Cloud Functions + Cloud Scheduler
+- Database: Firestore
+
+## Data Persistence
+All user data is stored in Firestore, ensuring persistence across devices.
