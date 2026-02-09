@@ -7,7 +7,7 @@ exports.logMood = async (req, res) => {
   const body = req.body || {};
   const { userId, mood } = body;
 
-  // ✅ กรณี Cloud Scheduler (ไม่มี body)
+  // กรณี Cloud Scheduler (ไม่มี body)
   if (!userId || !mood) {
     await db.collection("system_logs").add({
       type: "scheduler",
@@ -20,7 +20,7 @@ exports.logMood = async (req, res) => {
     });
   }
 
-  // ✅ กรณี user ใช้งานจริง
+  // กรณี user ใช้งานจริง
   await db.collection("logs").add({
     userId,
     mood,
