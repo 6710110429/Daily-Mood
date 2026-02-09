@@ -1,7 +1,16 @@
 const express = require("express");
+const admin = require("firebase-admin");
+
 const app = express();
+app.use(express.json()); // ⭐ สำคัญมาก
 
 console.log("🔥 REAL BACKEND INDEX.JS LOADED");
+
+// ===== Firebase / Firestore =====
+admin.initializeApp({
+  credential: admin.credential.applicationDefault(),
+});
+const db = admin.firestore();
 
 // ===== Security: API Key Protection =====
 app.use((req, res, next) => {
@@ -17,12 +26,35 @@ app.get("/health", (req, res) => {
   res.send("OK");
 });
 
-// ===== Multi-user API =====
-app.get("/user/:id", (req, res) => {
-  console.log("✅ USER ROUTE HIT", req.params.id);
+// ===== Create / Update User (Multi-user + DB) =====
+app.post("/user/:id", async (req, res) => {
+  const userId = req.params.id;
+  const { name, mood } = req.body;
+
+  await db.collection("users").doc(userId).set({
+    name,
+    mood,
+    updatedAt: new Date(),
+  });
+
   res.json({
-    userId: req.params.id,
-    status: "working"
+    userId,
+    status: "saved",
+  });
+});
+
+// ===== Get User =====
+app.get("/user/:id", async (req, res) => {
+  const userId = req.params.id;
+
+  const doc = await db.collection("users").doc(userId).get();
+  if (!doc.exists) {
+    return res.status(404).json({ error: "User not found" });
+  }
+
+  res.json({
+    userId,
+    ...doc.data(),
   });
 });
 
